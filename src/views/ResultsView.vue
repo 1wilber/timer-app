@@ -1,8 +1,9 @@
 <script setup>
 import { useResultStore } from '@/stores/result';
-import ResultList from '../components/results/ResultList.vue'
+import ResultList from '@/components/results/ResultList.vue'
+import EventList from '@/components/events/EventList.vue';
 
-const { results, add } = useResultStore()
+const { results } = useResultStore()
 
 const start = () => {
   console.log('timer:started')
@@ -20,5 +21,6 @@ const start = () => {
     <div class="timer-footer">
       <ResultList :results="results" />
     </div>
+    <EventList />
   </div>
 </template>
