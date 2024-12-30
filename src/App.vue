@@ -3,7 +3,5 @@ import ResultsView from './views/ResultsView.vue'
 </script>
 
 <template>
-  <main>
-    <ResultsView/>
-  </main>
+  <ResultsView/>
 </template>

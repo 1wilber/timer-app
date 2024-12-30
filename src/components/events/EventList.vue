@@ -8,42 +8,10 @@ const events = [{
 ]
 
 const eventStore = useEventStore()
-
-
 </script>
+
 <template>
-  <div class="events">
-    <div @click="() => eventStore.change(event)" v-for="event in events" :key="event.id"
-      :class="{ event: true, active: event.id === eventStore.currentEvent.id }">
-      {{ event.name }}
-    </div>
-  </div>
-
+  <select name="currentEvent" @change="() => eventStore.change(event)">
+    <option :selected="eventStore.currentEvent.id === event.id" v-for="event in events" :key="event.id" >{{event.name}}</option>
+  </select>
 </template>
-
-<style scoped>
-.events {
-  display: grid;
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  padding: 0.5rem 1rem;
-}
-
-.events>.event {
-  background-color: var(--bg-color);
-  width: fit-content;
-  color: var(--fg-color);
-  padding: 1rem;
-  cursor: pointer;
-}
-
-.events>.event:hover {
-  filter: brightness(0.9);
-}
-
-.events>.event.active {
-  background-color: var(--primary);
-  color: var(--primary-invert);
-}
-</style>
