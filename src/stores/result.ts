@@ -33,7 +33,8 @@ export const useResultStore = defineStore(
 
     function stop() {
       if (status.value === 'running') {
-        clearInterval(interval)
+        console.log('stopped')
+        clearInterval(interval.value)
         status.value = 'stopped'
         const newResult: Result = {
           ms: currentTimeMs.value,

@@ -7,11 +7,19 @@ const events = [{
 { id: "444", name: "4x4" }
 ]
 
-const eventStore = useEventStore()
+const { currentEvent, setCurrentEvent } = useEventStore()
+
+const handleChange = (event) => {
+  const { value } = event.target
+  setCurrentEvent(value)
+}
+
 </script>
 
 <template>
-  <select name="currentEvent" @change="() => eventStore.change(event)">
-    <option :selected="eventStore.currentEvent.id === event.id" v-for="event in events" :key="event.id" >{{event.name}}</option>
+  <select name="currentEvent" @change="handleChange">
+    <option :key="event.id" :value="event.id" :selected="currentEvent.id === event.id" v-for="event in events">
+      {{ event.name }}
+    </option>
   </select>
 </template>

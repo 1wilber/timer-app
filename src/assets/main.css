@@ -1,4 +1,7 @@
 @import '@picocss/pico';
+:root {
+  --sidebar-width: 180px;
+}
 
 html,
 body {
@@ -25,8 +28,31 @@ body {
   place-content: center;
 }
 
-.timer > footer {
+main#app {
+  padding: 0;
+}
+
+main > aside {
+  width: var(--sidebar-width);
   position: absolute;
-  left: 0;
-  bottom: 0;
+  transition: transform 300ms ease-in-out;
+  left: -100%;
+  transform: translateX(-100%);
+  height: 100vh;
+}
+
+.table-container {
+  overflow: auto;
+  height: inherit;
+}
+
+@media screen and (min-width: 768px) {
+  main#app {
+    margin-left: var(--sidebar-width);
+  }
+
+  main#app > aside {
+    left: 0;
+    transform: translateX(0);
+  }
 }

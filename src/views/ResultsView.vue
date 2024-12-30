@@ -8,7 +8,10 @@ const resultStore = useResultStore()
 </script>
 
 <template>
-  <div class="timer">
+  <aside>
+    <ResultList />
+  </aside>
+  <div class="timer container-fluid">
     <EventList />
     <header>
       <h2>{{ resultStore.currentScramble }}</h2>
@@ -16,8 +19,5 @@ const resultStore = useResultStore()
     <section tabindex="0" @keydown.space="resultStore.stop" @keyup.space="resultStore.start">
       <h2 class="">{{ resultStore.currentTimeMs }}</h2>
     </section>
-    <footer>
-      <ResultList />
-    </footer>
   </div>
 </template>
