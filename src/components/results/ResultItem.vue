@@ -1,12 +1,10 @@
-<script setup>
-const { result } = defineProps({
-    result: { type: Object },
-})
+<script setup lang="ts">
+const { result } = defineProps<{ result: Result }>()
 </script>
 
 <template>
-    <tr>
-        <th>{{ result.id }}</th>
-        <td>{{ result.time }}</td>
-    </tr>
+  <tr>
+    <th>{{ result.ms }}</th>
+    <td>{{ result.createdAt }}</td>
+  </tr>
 </template>

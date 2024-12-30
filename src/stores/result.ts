@@ -1,35 +1,67 @@
+import { randomScrambleForEvent } from 'cubing/scramble'
 import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
-export const useResultStore = defineStore('result', {
-  state: () => ({
-    results: [],
-    status: "ready",
-    interval: null,
-    currentTimeMs: 0,
-  }),
-  actions: {
-    start() {
-      if (this.status === "stopped") {
-        this.status = "ready"
+export const useResultStore = defineStore(
+  'result',
+  () => {
+    const results = ref<[] | Result[]>([])
+    const status = ref('ready')
+    const interval = ref<null>(null)
+    const currentTimeMs = ref(0)
+    const currentScramble = ref('')
+
+    async function generateScramble() {
+      currentScramble.value = ''
+      const scramble = (await randomScrambleForEvent('333')).toString()
+      currentScramble.value = scramble
+      console.log('[scramble generated]', scramble)
+    }
+
+    function start() {
+      if (status.value === 'stopped') {
+        status.value = 'ready'
         return
       }
 
-      this.currentTimeMs = 0
-      this.status = "running"
-      this.interval = setInterval(() => {
-        this.currentTimeMs += 100
-      }, 100)
-    },
+      currentTimeMs.value = 0
+      status.value = 'running'
+      interval.value = setInterval(() => {
+        currentTimeMs.value += 10
+      }, 10)
+    }
 
-    stop() {
-      if(this.status === "running") {
-        clearInterval(this.interval)
-        this.status = "stopped"
-        console.log('stop')
+    function stop() {
+      if (status.value === 'running') {
+        clearInterval(interval)
+        status.value = 'stopped'
+        const newResult: Result = {
+          ms: currentTimeMs.value,
+          scramble: currentScramble.value,
+          createdAt: Date.now(),
+        }
+
+        results.value = [newResult, ...results.value]
+
+        generateScramble()
       }
     }
+
+    generateScramble()
+
+    return {
+      status,
+      currentTimeMs,
+      interval,
+      currentScramble,
+      start,
+      stop,
+      results,
+    }
   },
-  persist: {
-    pick: ["results"]
+  {
+    persist: {
+      pick: ['results'],
+    },
   },
-})
+)

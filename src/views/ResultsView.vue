@@ -11,13 +11,13 @@ const resultStore = useResultStore()
   <div class="timer">
     <EventList />
     <header>
-      <h2>L F' R' U2 F U R' B L' B2 U F2 R2 U2 F2 B2 L2 U' D' F</h2>
+      <h2>{{ resultStore.currentScramble }}</h2>
     </header>
     <section tabindex="0" @keydown.space="resultStore.stop" @keyup.space="resultStore.start">
       <h2 class="">{{ resultStore.currentTimeMs }}</h2>
     </section>
     <footer>
-      <ResultList :results="results" />
+      <ResultList />
     </footer>
   </div>
 </template>

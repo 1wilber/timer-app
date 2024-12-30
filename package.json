@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@picocss/pico": "^2.0.6",
+    "cubing": "^0.53.8",
     "pinia": "^2.3.0",
     "pinia-plugin-persistedstate": "^4.2.0",
     "typescript": "^5.7.2",
