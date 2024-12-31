@@ -11,3 +11,18 @@ pinia.use(piniaPluginPersistedstate)
 app.use(pinia)
 
 app.mount('#app')
+
+const timerWrapper = document.querySelector('.wrapper')
+
+const focusWrapper = (activeEl) => {
+  console.log('[focus-wrapper]', activeEl)
+  if (activeEl === timerWrapper) {
+    return
+  } else {
+    timerWrapper.focus()
+  }
+}
+
+window.addEventListener('focusin', focusWrapper)
+
+window.addEventListener('focusout', focusWrapper)

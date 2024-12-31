@@ -8,7 +8,8 @@ body {
   height: 100%;
   width: 100%;
 }
-#app {
+
+.wrapper, #app {
   height: inherit;
 }
 
@@ -28,11 +29,7 @@ body {
   place-content: center;
 }
 
-main#app {
-  padding: 0;
-}
-
-main > aside {
+.wrapper > aside {
   width: var(--sidebar-width);
   position: absolute;
   transition: transform 300ms ease-in-out;
@@ -47,11 +44,11 @@ main > aside {
 }
 
 @media screen and (min-width: 768px) {
-  main#app {
+  .wrapper {
     margin-left: var(--sidebar-width);
   }
 
-  main#app > aside {
+  .wrapper > aside {
     left: 0;
     transform: translateX(0);
   }
